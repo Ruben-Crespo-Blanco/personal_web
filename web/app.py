@@ -1,20 +1,20 @@
 from flask import Flask, render_template, flash, redirect, request
 from flask_mail import Mail, Message
 import os
-from config import Config
+from dotenv import load_dotenv
 
 
-
+load_dotenv()
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
-    app.secret_key = Config.SECRET_KEY
-    app.config['MAIL_SERVER'] = Config.MAIL_SERVER            
-    app.config['MAIL_PORT'] = Config.MAIL_PORT
-    app.config['MAIL_USE_TLS'] = Config.MAIL_USE_TLS
-    app.config['MAIL_USERNAME'] = Config.MAIL_USERNAME    
-    app.config['MAIL_PASSWORD'] = Config.MAIL_PASSWORD       
-    app.config['MAIL_DEFAULT_SENDER'] = Config.MAIL_DEFAULT_SENDER
+    app.secret_key = os.getenv("SECRET_KEY")
+    app.config['MAIL_SERVER'] = os.getenv("MAIL_SERVER")            
+    app.config['MAIL_PORT'] = os.getenv("MAIL_PORT")
+    app.config['MAIL_USE_TLS'] = os.getenv("MAIL_USE_TLS")
+    app.config['MAIL_USERNAME'] = os.getenv("MAIL_USERNAME")    
+    app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")       
+    app.config['MAIL_DEFAULT_SENDER'] = os.getenv("MAIL_DEFAULT_SENDER")
 
     mail = Mail(app)
 
